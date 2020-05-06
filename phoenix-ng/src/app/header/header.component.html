@@ -1,0 +1,81 @@
+<header>
+  <!-- ================Navbar================ -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+
+    <a class="navbar-brand mr-auto border-display" href="#" routerLink="home"><img class="logo" src="assets/img/logo.png"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ml-auto border-display">
+        <li class="nav-item navbar-left item-left" [ngClass]="{'active': homeRoute.isActive}">
+          <a class="nav-link fontfamily" href="#" routerLink="home" routerLinkActive #homeRoute="routerLinkActive"><span class="border-link">Accueil <span class="sr-only">(current)</span></span></a>
+        </li>
+
+        <li class="nav-item border-display">
+          <app-search></app-search>
+          <!-- <form class="form-inline">
+            <div class="input-group" >
+                <div class="input-group-append">
+                    <select class="input-select">
+                        <option value="0">Toutes les catégories</option>
+                        <option value="1">Littérature</option>
+                        <option value="2">Roman</option>
+                        <option value="3">Roman historique</option>
+                        <option value="4">Roman policier</option>
+                        <option value="5">Biographie/Histoire vraie</option>
+                        <option value="6">SF/Fantastique</option>
+                        <option value="7">BD</option>
+                        <option value="8">Manga</option>
+                      </select>
+                </div>        
+              <input type="text" class="form-control" placeholder="Search">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-red" routerLink="search"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </form> -->
+        </li>
+      </ul>
+    
+      <ul class="navbar-nav ml-auto border-display">
+        <li class="nav-item navbar-right" [ngClass]="{'active': registerRoute.isActive}" *ngIf="!session.user">
+          <a class="nav-link " id="login" routerLink="register" routerLinkActive #registerRoute="routerLinkActive">S'inscrire</a>
+      </li>
+        <li class="nav-item navbar-right" [ngClass]="{'active': loginRoute.isActive}" *ngIf="!session.user; else disconnect">
+            <a class="nav-link " id="login" routerLink="login" routerLinkActive #loginRoute="routerLinkActive">Se connecter</a>
+        </li>
+        <ng-template #disconnect>
+          <li class="nav-item navbar-right">
+            <div class="dropdown" ngbDropdown >
+              <button ngbDropdownToggle class="btn dropdown-toggle setting" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                
+                Bonjour {{session.user.firstName}} {{session.user.lastName}}<i class="fa fa-cog fa-2x"></i>
+              
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu" ngbDropdownMenu >
+                <button ngbDropdownItem class="nav-link-drop dropdown-item" type="button">Mon profil</button>
+                <button ngbDropdownItem class="nav-link-drop dropdown-item" type="button" routerLink="myOrder">Mes commandes passées</button>
+                <button ngbDropdownItem class="nav-link-drop dropdown-item" type="button" (click)="logOut()">Se deconnecter</button>
+              </div>
+            </div>
+          </li>
+        </ng-template>
+        
+        <li class="nav-item navbar-right item-right" [ngClass]="{'active': basketRoute.isActive}">
+          <button class="nav-link-drop dropdown-item basket-icon" type="button">
+            <a class="basket-icon-link" routerLink="basket" routerLinkActive #basketRoute="routerLinkActive">
+              <i class="fa fa-shopping-cart fa-2x"></i>
+              <span class='badge badge-warning' id='lblCartCount' *ngIf="session.basketQuantity != 0; emptyBasket"> {{session.basketQuantity}} </span>
+              <ng-template #emptyBasket>
+                  <span class='badge badge-warning' id='lblCartCount'> </span>
+              </ng-template>
+            </a>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

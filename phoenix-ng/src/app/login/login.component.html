@@ -1,0 +1,58 @@
+<main>
+    <div class="container py-5 register">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="card border-secondary">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link" >Se connecter</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <form class="needs-validation" [ngClass]="{'was-validated': loginForm.dirty && loginForm.invalid && loginForm.submitted}"
+                                  (ngSubmit)="authenticate(loginForm)" #loginForm="ngForm">
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="username"><i class="fa fa-at" ></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" id="username" placeholder="Saisir votre email" aria-label="username" aria-describedby="emailHelp" 
+                                        name="username" ngModel required email #username="ngModel"/>
+                                        <div class="valid-feedback" *ngIf="(username.dirty || loginForm.submitted) && username.valid">Validation ok</div>
+                                        <div class="invalid-feedback" *ngIf="(username.dirty || loginForm.submitted) && username.hasError('required')">Identifiant obligatoire</div>
+                                        <div class="invalid-feedback" *ngIf="(username.dirty || loginForm.submitted) && username.hasError('email')">Veuillez saisir votre email</div>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="password"><i class="fa fa-lock"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Saisir votre mot de passe" aria-label="password" aria-describedby="password" 
+                                        name="password" ngModel required #password="ngModel"/>                                                    
+                                        <div class="ng-untouched" *ngIf="(password.dirty || loginForm.submitted) && password.hasError('required')"
+                                            [ngClass]="{'invalid-feedback': password.dirty || loginForm.submitted}">Mot de passe obligatoire</div>
+                                    </div>
+
+                                    <!-- <div class="alert alert-danger" role="alert" *ngIf="authFailed">
+                                        Echec de l'authentification
+                                    </div> -->
+                                </div>
+                                <div class="card-footer">
+                                    <!-- <button type="button" class="btn btn-red btn-block" (click)="authenticate(usernameInput.value, passwordInput.value)">Se connecter</button> -->
+                                    <button type="submit" class="btn btn-red btn-block">Se connecter</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--/row-->
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+    </div>
+</main>

@@ -1,0 +1,80 @@
+<div class="container py-5 register">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card border-secondary">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active">S'inscrire</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <form class="needs-validation" [ngClass]="{'was-validated': registerForm.dirty && registerForm.invalid && registerForm.submitted}"
+                                  (ngSubmit)="register(registerForm)" #registerForm="ngForm">
+                            <div class="card-body">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="username"><i class="fa fa-at fa-lg" ></i></span>
+                                    </div>
+                                    <input type="email" class="form-control" placeholder="Saisir votre email" aria-label="username" aria-describedby="emailHelp"
+                                        name="username" ngModel required email #username="ngModel">     
+                                    <div class="valid-feedback" *ngIf="(username.dirty || registerForm.submitted) && username.valid">Validation ok</div>
+                                    <div class="invalid-feedback" *ngIf="(username.dirty || registerForm.submitted) && username.hasError('required')">Identifiant obligatoire</div>
+                                    <div class="invalid-feedback" *ngIf="(username.dirty || registerForm.submitted) && username.hasError('email')">Veuillez saisir votre email</div>                                               
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="password"><i class="fa fa-lock fa-lg"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="Saisir votre mot de passe" aria-label="password" aria-describedby="password" 
+                                        name="password" ngModel required #password="ngModel" minlength="8">  
+                                    <div class="ng-untouched" *ngIf="(password.dirty || registerForm.submitted) && password.hasError('required')"
+                                        [ngClass]="{'invalid-feedback': password.dirty || registerForm.submitted}">Mot de passe obligatoire</div> 
+                                    <div class="ng-untouched" *ngIf="(password.dirty || registerForm.submitted) && password.hasError('minlength')"
+                                        [ngClass]="{'invalid-feedback': password.dirty || registerForm.submitted}">Mot de passe trop court</div>                                                  
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="firstsName"><i class="fa fa-user fa-lg"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Saisir votre prénom" aria-label="firstName" aria-describedby="firstName" 
+                                        name="firstName" ngModel required #firstName="ngModel">
+                                    <div class="ng-untouched" *ngIf="(firstName.dirty || registerForm.submitted) && firstName.hasError('required')"
+                                        [ngClass]="{'invalid-feedback': firstName.dirty || registerForm.submitted}">Prénom obligatoire</div>                                                     
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="lastName"><i class="fa fa-user fa-lg"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Saisir votre nom" aria-label="lastName" aria-describedby="lastName"
+                                        name="lastName" ngModel required #lastName="ngModel">      
+                                    <div class="ng-untouched" *ngIf="(lastName.dirty || registerForm.submitted) && lastName.hasError('required')"
+                                        [ngClass]="{'invalid-feedback': lastName.dirty || registerForm.submitted}">Nom obligatoire</div>                                                 
+                                </div>
+
+                                <div class="alert alert-success" role="alert" *ngIf="registerSuccess">
+                                    Vous êtes inscrit. Vous allez être rédirigé.
+                                </div>
+
+                                <div class="alert alert-danger" role="alert" *ngIf="registerFailed">
+                                    Impossible de vous enregistrer! Essayer un autre email.
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-outline-success btn-block">S'inscrire</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--/row-->
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>
+<!--/container-->

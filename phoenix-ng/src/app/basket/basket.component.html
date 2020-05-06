@@ -1,0 +1,171 @@
+<div class="container">
+    <div class="shopping-cart">
+        <div class="row">
+            <div class="cart-title">
+                <h3>Vous avez {{session.basket.lines.length}} article(s) dans votre panier</h3>
+            </div>
+        </div>
+        <div *ngIf="session.basket && session.basket?.lines.length != 0; else basketEmpty">
+            <div class="row justify-content-between">
+                <div class="col-lg-7 col-md-7">
+                    <div class="row cart-body" *ngFor="let line of session.basket.lines">
+                        <div class="col-lg-2 col-md-2">
+                            <div class="image-product" *ngIf="line.product.imageId != -1; else noImage">
+                                <img class="basket-image" src="/api/images/?id={{line.product.imageId}}" alt="Image">
+                            </div>
+                            <ng-template #noImage>
+                                <div class="image-product">
+                                    <img class="basket-image" src="assets/img/no_image_available.png" alt="Image">
+                                </div>
+                            </ng-template>
+                        </div>
+                        <div class="col-lg-6 col-md-6 my-auto">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 product-name" >
+                                        <h6>{{line.product.name}}</h6>
+                                </div>
+                                
+                                <div class="col-lg-4 col-md-4 input-quantity">
+                                    <form>
+                                        <input (click)="session.onProductModifyQuantity(line.product.id, quantityInput.value)" type="number" class="input-number-quantity" value="{{line.quantity}}" min="1" max="80" #quantityInput required>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 my-auto">
+                            <div class="product-price">
+                                    <h6>{{line.product.price}} €</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-md-3">
+                            <div class="product-delete">
+                                <a type="button" (click)="session.onDeleteOrderLine(line.product.id)"><i class="fa fa-times-circle fa-sm"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 align-self-start">
+                    <div class="shippin-cart">
+                        <div class="pull-right">
+                            <div class="pull-right">
+                                Prix total: <b>{{session.calculTotalAmount()}} €</b>
+                            </div>
+                        </div>
+                        <!-- <a class="place-order btn-block" type="button" (click)="placeOrder()">Passer votre commande</a> -->
+                        <button class="btn btn-red btn-outline-red btn-block ml-1 rounded-0" (click)="placeOrder()">Passer votre commande</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <ng-template>
+            <div class="empty-basket">
+                Vous n'avez aucun article dans votre panier.
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+
+
+
+
+<!-- <div class="shoppping-cart">
+    <div class="container">
+        <div class="card shopping-cart">
+            <div class="card-header text-dark">
+                <h3>Vous avez {{session.basket.lines.length}} article(s) dans votre panier</h3>
+            </div>
+            <div class="card-body" *ngIf="session.basket && session.basket?.lines.length != 0; else basketEmpty">
+                <div class="row col-md-3 basket-item" *ngFor="let line of session.basket.lines">
+                    <div class="image-product" *ngIf="line.product.imageId != -1; else noImage">
+                        <img class="basket-image" src="/api/images/?id={{line.product.imageId}}" alt="Image">
+                    </div>
+                    <ng-template #noImage>
+                        <div class="image-product">
+                            <img class="basket-image" src="assets/img/no_image_available.png" alt="Image">
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+
+
+
+
+<!-- 
+
+<div class="container">
+    <div class="alert alert-success" role="alert" *ngIf="placeOrderSuccess">
+        Votre commande a bien enregistrée!
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="placeOrderFailed">
+        Une erreur est survenue.
+    </div>
+    <div class="card shopping-cart">
+        <div class="card-header bg-dark text-light">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            Basket
+            <div class="clearfix"></div>
+        </div>
+        <div class="card-body" *ngIf="session.basket && session.basket?.lines.length != 0; else basketEmpty">
+                <div class="row basket-item" *ngFor="let line of session.basket.lines">
+                <div class="col-12 col-sm-12 col-md-2 text-center" *ngIf="line.product.imageId != -1; else noImage">
+                    <img class="basket-image" src="/api/images/?id={{line.product.imageId}}" alt="Image">
+                </div>
+                <ng-template #noImage>
+                    <div class="col-12 col-sm-12 col-md-2 text-center">
+                        <img class="basket-image" src="assets/img/no_image_available.png" alt="Image">
+                    </div>
+                </ng-template>
+                        <img class="img-responsive" src="/api/" alt="prewiew" width="120" height="80">
+                    </div>
+                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                        <h4 class="product-name"><strong>{{line.product.name}}</strong></h4>
+                    </div>
+                    <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                        <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                            <h6><strong>{{line.product.price}} € <span class="text-muted">x</span></strong></h6>
+                        </div>
+                        <div class="col-4 col-sm-4 col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </span>
+                                <input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-2 col-sm-2 col-md-2 text-right">
+                            <button type="button" class="btn btn-outline-danger btn-xs">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            <div class="pull-right">
+            </div>
+        </div>
+        <ng-template #basketEmpty>
+        <div class="card-body">Votre panier est vide. </div>
+        
+        </ng-template>
+        <div class="card-footer">
+            <div class="pull-right" style="margin: 10px">
+                <a class="btn btn-success pull-right" (click)="placeOrder()">Passer votre commande</a>
+                <div class="pull-right" style="margin: 5px">
+                    Total price: <b>50.00€</b>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div> -->

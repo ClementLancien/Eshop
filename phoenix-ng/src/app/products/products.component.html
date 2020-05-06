@@ -1,0 +1,132 @@
+<!-- <div *ngIf="products.length > 0; else noResult">
+    <h2>Nombre de livres : {{products.length}}</h2>
+    <ul>
+        <li *ngFor="let p of products">
+            <a (click)="onSelected(p)" [routerLink]="['/detail', p.id]">[{{p.id}}] : {{p.name}}</a>
+        </li>
+    </ul>
+</div>
+<ng-template #noResult><h2>Pas de résultats</h2></ng-template> -->
+<!-- {{search.products | json}} -->
+<div class="products-section" *ngIf="search.products">
+  <div class="container col-md-9">
+      <div class="row ">
+        <!-- Aside bar-->
+        <div class="row col-md-3">
+          <!-- aside Widget -->
+          <div class="aside">
+            <h3 class="aside-title">Tag</h3>
+            <div class="checkbox-filter">
+              <div class="input-checkbox">
+                  <input type="checkbox" id="category-1">
+                  <label for="category-1">
+                    Coup de coeur
+                  </label>
+              </div>
+
+              <div class="input-checkbox" >
+                  <input type="checkbox" id="category-2">
+                  <label for="category-2">
+                    Nouveauté
+                  </label>
+              </div>
+
+              <div class="input-checkbox">
+                  <input type="checkbox" id="category-3">
+                  <label for="category-3">
+                    Top Ventes
+                  </label>
+              </div>
+
+              <div class="input-checkbox">
+                  <input type="checkbox" id="category-4">
+                  <label for="category-4">
+                    Promo
+                  </label>
+              </div>
+
+              <div class="input-checkbox">
+                  <input type="checkbox" id="category-5">
+                  <label for="category-5">
+                    Jeunesse
+                  </label>
+              </div>
+            </div>                
+            <!-- /aside Widget -->
+          </div>
+          <!-- /ASIDE -->
+        </div>
+        <!-- STORE -->
+      <div class="store col-md-9">
+        <!-- store top filter -->
+        <div class="store-filter clearfix">
+          <div class="store-sort">
+              <label>
+                  Trier:
+                  <select class="input-select">
+                      <option value="0">Pertinence</option>
+                      <option value="1">Prix</option>
+                  </select>
+              </label>
+
+              <label>
+                  Résultats par page:
+                  <select class="input-select">
+                      <option value="0">20</option>
+                      <option value="1">50</option>
+                  </select>
+              </label>
+          </div>
+      <!-- /store top filter -->
+      </div>
+     
+      <div class="row" *ngIf="search.products.length > 0; else noProduct">
+        <div class="col-md-3 col-sm-6" *ngFor="let product of search.products">
+          <div class="product-grid">
+            <div class="product-image">
+              <a [routerLink]="['/detail', product.id]" *ngIf="product.imageId != -1; else noImage">
+                  <img src="/api/images/?id={{product.imageId}}" alt="Image">
+              </a>
+              <ng-template #noImage>
+                <a [routerLink]="['/detail', product.id]">
+                  <img src="assets/img/no_image_available.png" alt="Image">
+                </a>
+              </ng-template>
+              <ul class="social">
+                  <li><a [routerLink]="['/detail', product.id]" data-tip="Détail"><i class="fa fa-eye"></i></a></li>
+              </ul>
+              <!-- <span class="product-category-label">{{product.type}}</span> -->
+              <span [ngClass]="{'product-category-label-book' : product.type == 'book', 'product-category-label-movie' : product.type == 'movie','product-category-label-album' : product.type == 'album'}">
+              </span>
+            </div>
+            <div class="product-content">
+                <div class="product-name">
+                  <h3 class="title"><a [routerLink]="['/detail', product.id]" [innerHTML]="product.name |safeHtml">{{product.name | safeHtml}}</a></h3>
+                </div>
+                <div class="price">{{product.price}}€</div>
+                <!-- <div >{{product.description | limitTo:50}}</div> -->
+                <a class="add-to-cart" type="button" (click)="session.addToBasket(1, product)">Ajouter au panier</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+            <a routerLink [queryParams]="{ page: pager.currentPage - 1 }" class="page-link">Previous</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+            <a routerLink [queryParams]="{ page: pager.currentPage + 1 }" class="page-link">Next</a>
+        </li>
+
+    </ul> -->
+        <ng-template #noProduct>
+          <div class="row">
+            <div class="col-md-8">
+              <h2>Pas de Résultats. TRY AGAIN !!!</h2>
+            </div>
+          </div>
+        </ng-template>
+        
+      </div>
+    </div>
+  </div>

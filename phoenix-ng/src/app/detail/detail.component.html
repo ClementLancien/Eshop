@@ -1,0 +1,243 @@
+
+<!-- SECTION -->
+<article class="section" *ngIf="product">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row ">
+            <div class="col-md-5">
+                <div class="detail-image" *ngIf="product.imageId != -1; else noImage">
+                    <img src="/api/images/?id={{product.imageId}}" alt="Image">
+                </div>
+                <ng-template #noImage>
+                    <div class="no-image">
+                        <img src="assets/img/no_image_available.png" alt="Image">
+                    </div>
+                </ng-template>
+            </div>
+
+            <!-- Product detail -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">{{product.name}}</h2>
+                    <h3 class="product-author">
+                        <p *ngFor="let author of product.authors">
+                            {{author.name}}
+                        </p>
+                    </h3>
+                    <div>
+                        <div class="product-rating">
+                            <!-- <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i> -->
+                            <i [className]="0 >= score ? 'fa fa-star-o' : 'fa fa-star'"></i> 
+                            <i [className]="1 >= score ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                            <i [className]="2 >= score ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                            <i [className]="3 >= score ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                            <i [className]="4 >= score ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                            ({{score | number:'1.0-2'}})
+                        </div>
+                        <a class="review-link" href="#product-tab">{{reviews.length}} Avis | Ajouter votre avis  </a>
+                        
+                    </div>
+                    <div>
+                        <h3 class="product-price">{{product.price}}€</h3>
+                        <span class="product-available">En stock</span>
+                    </div>
+                    <p>{{product.description}}</p>
+                    
+                    <div>
+                        <label for="quantity">Quantité</label>
+                        <input id="number" type="number" value="1" min="1" #quantityInput>
+                        <button type="button" class="btn btn-red" (click)="session.addToBasket(quantityInput.value, product)">Ajouter au panier</button>
+                    </div>
+                    <div class="alert alert-success detail-warning" role="alert" *ngIf="session.addToBasketSuccess">
+                        Article ajouté avec succès à votre panier.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="product-tab">
+                    <!-- Product tabs nav --> 
+                    <ngb-tabset [destroyOnHide]="false">
+                        <ngb-tab title="Description">
+                        <ng-template ngbTabContent>
+                            <div id="description">
+                                <p>{{product.description}}</p>
+                            </div>
+                        </ng-template>
+                        </ngb-tab>
+                        <ngb-tab>
+                        <ng-template ngbTabTitle><b>Détail</b></ng-template>
+                        <ng-template ngbTabContent>
+                            <div id="detail" [ngSwitch]="product.type">
+                                <div class="content" *ngSwitchCase="'book'">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Titre</th>
+                                                <th>{{product.name}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Auteur</th>
+                                                <th><p *ngFor="let author of product.authors">{{author.name}}</p></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Date de publication</th>
+                                                <th>{{product.releaseDate}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Numéro ISBN</th>
+                                                <th>{{product.isbn}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Langue</th>
+                                                <th>{{product.language}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Nombre de pages</th>
+                                                <th>{{product.pages}}</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="content" *ngSwitchCase="'movie'">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Titre</th>
+                                                <th>{{product.name}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Producteur(s)</th>
+                                                <th>{{product.director.name}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Acteur(s)</th>
+                                                <th><p *ngFor="let actor of product.actors">{{actor.name}}</p></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Date de sortie</th>
+                                                <th>{{product.releaseDate}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Catégorie</th>
+                                                <th>{{product.family.name}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Langue</th>
+                                                <th><p *ngFor="let language of product.languages">{{language}}</p></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Durée(min)</th>
+                                                <th>{{product.lengthMovie}}</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="content" *ngSwitchCase="'album'">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th>Titre</th>
+                                                <th>{{product.name}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Artiste(s)</th>
+                                                <th><p *ngFor="let artist of product.artists">{{artist.name}}</p></th>
+                                            </tr>
+                                            <tr>
+                                                <th>Date de sortie</th>
+                                                <th>{{product.releaseDate}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Catégorie</th>
+                                                <th>{{product.family.name}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Durée(min)</th>
+                                                <th>{{product.lengthAlbum}}</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="content" *ngSwitchDefault>Erreur</div>
+                            </div>
+                        </ng-template>
+                        </ngb-tab>
+                        <ngb-tab title="Avis">
+                        <ng-template ngbTabContent>
+                            <div id="reviews">
+                                <div class="reviews">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <ul class="reviews" *ngIf="reviews.length != 0; else noReview">
+                                                <li *ngFor="let review of reviews ">
+                                                    <div class="review-heading">
+                                                        <h5 class="name">{{review.username}}</h5>
+                                                        <!-- <p class="date">27 DEC 2019</p> -->
+                                                        <div class="review-rating">
+                                                             <!-- class="fa fa-star"
+                                                            class="fa fa-star-o empty", "{'fa fa-star' : 1 >= review.rating}"'fa fa-star-o' : review.rating >= 5 -->
+                                                            <i [className]="0 >= review.rating ? 'fa fa-star-o' : 'fa fa-star'"></i> 
+                                                            <i [className]="1 >= review.rating ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                                                            <i [className]="2 >= review.rating ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                                                            <i [className]="3 >= review.rating ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                                                            <i [className]="4 >= review.rating ? 'fa fa-star-o' : 'fa fa-star'"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>{{review.comment}}</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <ng-template #noReview>
+                                                <ul class="reviews">
+                                                    <li>Soyez le premier a donné votre avis</li>
+                                                </ul>
+                                            </ng-template>
+                                        </div>
+                                        <!-- Review Form -->
+                                        <div class="col-md-4">
+                                            <div id="review-form">
+                                                <form class="review-form" >
+                                                    <div class="input-rating">
+                                                        <span>Votre note: </span>
+                                                        <div class="stars" >
+                                                            <input id="star5" name="rating" value="5" type="radio" (click)="changeRating(rating5Input.value)" #rating5Input><label for="star5"></label>
+                                                            <input id="star4" name="rating" value="4" type="radio" (click)="changeRating(rating4Input.value)" #rating4Input><label for="star4"></label>
+                                                            <input id="star3" name="rating" value="3" type="radio" (click)="changeRating(rating3Input.value)" #rating3Input><label for="star3"></label>
+                                                            <input id="star2" name="rating" value="2" type="radio" (click)="changeRating(rating2Input.value)" #rating2Input><label for="star2"></label>
+                                                            <input id="star1" name="rating" value="1" type="radio" (click)="changeRating(rating1Input.value)" #rating1Input><label for="star1"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input">
+                                                        <textarea id="comment" name="rating" contenteditable="true" (change)="onContentChange(content.value)" #content>{{data.content}}</textarea >
+                                                    </div>
+                                                    <button type="submit" class="btn btn-red btn-block" (click)="addReview()">Votre avis</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
+                </div>
+            </div>
+        </div>
+    <!-- /row -->
+    </div>
+<!-- /container -->
+</article>
+<!-- /ARTCILE -->
+                                    
+
+
+                    
+                                
