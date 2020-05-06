@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.infotel.com/eshop"
+	xmlns:tns="http://www.infotel.com/eshop" elementFormDefault="qualified">
+
+	<element name="LoginRequest">
+		<complexType>
+			<sequence>
+				<element name="Username" type="string"></element>
+				<element name="Password" type="string"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+
+	<element name="LoginResponse">
+		<complexType>
+			<sequence>
+				<element name="Username" type="string"></element>
+				<element name="FirstName" type="string"></element>
+				<element name="LastName" type="string"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+
+
+
+
+	<element name="OrdersToProcessRequest">
+		<complexType></complexType>
+	</element>
+
+
+	<element name="OrdersToProcessResponse">
+		<complexType>
+			<sequence>
+				<element name="Order" type="tns:OrderType" maxOccurs="unbounded" minOccurs="0"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="OrderType">
+		<sequence>
+            <element name="Status" type="string"></element>
+            <element name="Date" type="dateTime"></element>
+			<element name="Customer" type="tns:CustomerType"></element>
+			<element name="OrderLines" type="tns:OrderLinesType"></element>
+		</sequence>
+		<attribute name="id" type="int" use="required"></attribute>
+		<attribute name="number" type="string" use="required"></attribute>
+	</complexType>
+
+	<complexType name="CustomerType">
+		<sequence>
+			<element name="FirstName" type="string"></element>
+			<element name="LastName" type="string"></element>
+			<element name="Address">
+				<complexType>
+					<sequence>
+						<element name="Street" type="string"></element>
+						<element name="PostCode" type="string"></element>
+						<element name="City" type="string"></element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ProductType">
+		<attribute name="id" type="int" use="required"></attribute>
+		<attribute name="name" type="string" use="required"></attribute>
+	</complexType>
+
+	<complexType name="OrderLineType">
+    	<sequence>
+    		<element name="Product" type="tns:ProductType"></element>
+    		<element name="Quantity" type="string"></element>
+    	</sequence>
+    	<attribute name="id" type="int" use="required"></attribute>
+    </complexType>
+
+
+	<complexType name="OrderLinesType">
+		<sequence>
+			<element name="OrderLine" type="tns:OrderLineType" maxOccurs="unbounded" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+
+</schema>
+
+<!-- Classe nommée -->
+<!-- <complexType name="LoginRequestType"> <sequence> <element name="Username" 
+	type="string"></element> <element name="Password" type="string"></element> 
+	</sequence> </complexType> <element name="LoginRequest" type="tns:LoginRequestType"></element> -->
+<!-- Classe anonyme -->

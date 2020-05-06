@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+ 	<purchase_order id="1" order_number="CDE20-0002" 
+					order_date="2020-01-13 17:02:00" status="Pending" customer_id="amelie@yahoo.fr"/>
+ 	<order_line id="1" position="0" quantity="1" order_id="1" product_id="1"/>
+	<order_line id="2" position="1" quantity="3" order_id="1" product_id="2"/>
+</dataset>

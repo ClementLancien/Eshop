@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<user_data username="achille@gmail.com" password="fleche" type="C" 
+			   first_name="Achille" last_name="Péléide"/>
+	<user_data username="amelie@yahoo.fr" password="cailloux" type="C" 
+			   first_name="Amelie" last_name="Poulain"
+			   street="12 rue de Montmartre" post_code="75018" city="Paris" country="France"/>
+	<user_data username="clement.lancien@gmail.com" password="test" type="C" 
+			   first_name="Clement" last_name="Lancien"
+			   street="[null]" post_code="[null]" city="[null]" country="[null]"/>
+	<user_data username="emile@yahoo.com" password="fleur" type="C"
+			   first_name="Émile" last_name="Lampion"
+			   street="18 rue des Lilas" post_code="59200" city="Tourcoing" country="France"/>
+	<user_data username="francois@free.fr" password="jaune" type="E" 
+			   first_name="François" last_name="Pignon"/>
+	<user_data username="kobe@free.fr" password="basket" type="C" 
+			   first_name="Bryant" last_name="Kobe"
+			   street="[null]" post_code="[null]" city="[null]" country="[null]"/>
+	<user_data username="needleman@yahoo.fr" password="alignment" type="E" 
+			   first_name="Needleman" last_name="Wunsch"/>
+	<user_data username="roger@gmail.com" password="secret" type="C" 
+	           first_name="Roger" last_name="Rabbit"
+	           street="18 rue des Lilas" post_code="75020" city="Paris" country="France"/>
+	<user_data username="smith@gmail.com" password="algo" type="E" 
+			   first_name="Smith" last_name="Waterman"/>
+	<customer_detail email="amelie@yahoo.fr" birth_date="1990-10-17" phone="0714152123"/>
+	<customer_detail email="emile@yahoo.com" birth_date="1985-04-26" phone="0624252627"/>
+	<customer_detail email="roger@gmail.com" birth_date="2001-05-30" phone="0601020304"/>
+</dataset>

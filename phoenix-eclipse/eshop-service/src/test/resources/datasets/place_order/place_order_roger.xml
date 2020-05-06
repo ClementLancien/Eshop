@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<purchase_order order_date="2020-01-13 17:02:00"
+					status="Pending" customer_id="amelie@yahoo.fr"/>
+ 	<purchase_order order_date="2020-01-13 17:02:00"
+ 					status="Pending" customer_id="emile@yahoo.com"/>
+	<purchase_order order_date="[now]" 
+					status="Pending" customer_id="roger@gmail.com"/>
+ 	<order_line position="0" quantity="1" product_id="1"/>
+	<order_line position="1" quantity="3" product_id="2"/>
+ 	<order_line position="0" quantity="2" product_id="3"/>
+	<order_line position="1" quantity="4" product_id="4"/>
+	<order_line position="0" quantity="1" product_id="1"/>
+	<order_line position="1" quantity="2" product_id="28"/>
+</dataset>

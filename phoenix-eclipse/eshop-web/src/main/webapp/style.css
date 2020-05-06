@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	/* text-align:center; */
+}
+
+th:nth-child(1) {
+	width: 800px;
+}
+th:nth-child(2) {
+	width: 100px;
+}
+th:nth-child(3) {
+	width: 100px;
+}
+
+td:nth-child(1)  {
+	padding-left: 10px;
+}
+td:nth-child(2), td:nth-child(3)  {
+	text-align: center;
+}

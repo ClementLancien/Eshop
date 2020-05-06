@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%-5level %C{1.} - %msg%n"/>
+    </Console>
+    <File name="AppFile" filename="eshop.log">
+      <PatternLayout pattern="%d{dd:MM:yyyy hh:mm:ss} - %-5level %C{36} - %msg%n"/>
+    </File>
+  </Appenders>
+  <Loggers>
+  	<Logger name="org.hibernate" level="info" additivity="false">
+  		<AppenderRef ref="Console"/>
+  	</Logger>
+  	<Logger name="org.springframework" level="debug" additivity="false">
+  		<AppenderRef ref="Console"/>
+  	</Logger>
+  	<Logger name="com.infotel" level="debug">
+  		<AppenderRef ref="Console"/>
+  	</Logger>
+    <Root level="error">
+     <AppenderRef ref="Console"/>
+     <!--  <AppenderRef ref="AppFile"/> -->
+    </Root>
+  </Loggers>
+</Configuration>

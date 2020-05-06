@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+	
+	<context-param>
+		<param-name>appName2</param-name>
+		<param-value>Ma boutique</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>com.infotel.eshop.web.i18n.Translate</param-value>
+	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>classpath:app-context-service.xml</param-value> -->
+		<!-- <param-value>/WEB-INF/app-context-web.xml</param-value> -->
+		<param-value>com.infotel.eshop.config.WebConfig</param-value>
+	</context-param>
+	<!-- on ajoute ce context car il faut l'indiquer au contexte load sinon le listener croit que webconfig est un fichier xml et non une classe -->
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>
+			org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>Home</servlet-name>
+		<servlet-class>com.infotel.eshop.web.HomeServlet</servlet-class>
+		<init-param>
+			<param-name>appName</param-name>
+			<param-value>EShop</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	
+ 	<servlet>
+		<servlet-name>Search</servlet-name>
+		<servlet-class>com.infotel.eshop.web.SearchServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Detail</servlet-name>
+		<servlet-class>com.infotel.eshop.web.DetailServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Detail</servlet-name>
+		<url-pattern>/detail</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Basket</servlet-name>
+		<servlet-class>com.infotel.eshop.web.BasketServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Basket</servlet-name>
+		<url-pattern>/basket</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Order</servlet-name>
+		<servlet-class>com.infotel.eshop.web.OrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Order</servlet-name>
+		<url-pattern>/order</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Register</servlet-name>
+		<servlet-class>com.infotel.eshop.web.RegisterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+	
+	
+<!-- 	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>com.infotel.eshop.web.LoginServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping> -->
+
+</web-app>

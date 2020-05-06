@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           				   http://www.springframework.org/schema/beans/spring-beans.xsd
+           				   http://www.springframework.org/schema/context
+         				   http://www.springframework.org/schema/context/spring-context.xsd
+         				   http://www.springframework.org/schema/tx
+     					   http://www.springframework.org/schema/tx/spring-tx.xsd">
+      
+<!-- 	<bean id="userService" class="com.infotel.eshop.service.UserServiceImpl">
+		<property name="userDao" ref="userDAO"></property>
+	</bean>
+	
+	<bean id="userDAO" class="com.infotel.eshop.dao.UserDaoJdbc">
+		<property name="datasource" ref="eshopDS"></property>
+	</bean> -->
+	
+	<context:component-scan base-package="com.infotel.eshop"/> <!-- package eshop et sous package cherche annotation et instancie les beans -->
+	<!-- Le post-processor -->
+	<!--  Maintenant on ne l'utilise pas -->
+	<context:property-placeholder location="file:/c:/Dev/jdbc.properties"/> <!-- ou file:c:\\Dev\\jdbc.properties -->
+	<!-- Ancienne version -->
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="file:c:\\Dev\\jdbc.properties"></property>
+	</bean> -->
+	
+	<!-- <bean id="eshopDS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property> -->
+		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/eshop?useSSL=false"></property>
+		<property name="username" value="scott"></property>
+		<property name="password" value="tiger"></property> -->
+	<!-- </bean> -->
+	
+	<!-- bean de type data source -->
+	<!-- on remplace ce qu il y a dans le fichier de persistence  -->
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<!-- on lui injecte la datasource remplace les propriétes de connection -->
+		<property name="dataSource" ref="eshopDS"/>
+		
+		<!-- remplace toutes les lignes de type class du fichier persistence -->
+		<property name="packagesToScan" value="com.infotel.eshop.model"/>
+		
+		<!-- on injecte le provider -->
+		<property name="jpaVendorAdapter" ref="vendorAdapter"/>
+		
+		
+		<!-- on injecte collection ici propriéte spécifique pr les requetes -->
+		<property name="jpaProperties">
+			<value>
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+			</value>
+		</property>
+	</bean>
+	
+	<!-- bean du provider dans persistence.xml  et on injecte ce bean sur emf. Obliger
+	de passer par classe car depend de limplementation de JPA -> hibernate openjpa eclipselink -->
+	<bean id="vendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	
+	<!-- on cree un bean de transaction dont on injecte l'EntityManagerFactory -->
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf"></property>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="txManager"/> 
+</beans>

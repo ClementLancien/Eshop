@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<!-- <user_data username="roger@gmail.com" password="secret" type="C" 
+	           first_name="Roger" last_name="Rabbit"
+	           street="18 rue des Lilas" post_code="75020" city="Paris"/>
+	<user_data username=" amelie@yahoo.fr" password="cailloux" type="C" 
+			   first_name="Amelie" last_name="Poulain"
+			   street="12 rue de Montmartre" post_code="75018" city="Paris"/>
+	<purchase_order/>
+	<order_line/> -->
+	<user_data username="roger@gmail.com" password="secret" type="C" 
+	           first_name="Roger" last_name="Rabbit"
+	           street="18 rue des Lilas" post_code="75020" city="Paris" country="France"/>
+	<user_data username="amelie@yahoo.fr" password="cailloux" type="C" 
+			   first_name="Amelie" last_name="Poulain"
+			   street="12 rue de Montmartre" post_code="75018" city="Paris" country="France"/>
+	<user_data username="clement.lancien@gmail.com" password="test" type="C" 
+			   first_name="Clement" last_name="Lancien"/>
+			   <!--  street="[null]" post_code="[null]" city="[null]" country="[null]"/>-->
+	<user_data username="achille@gmail.com" password="fleche" type="C" 
+			   first_name="Achille" last_name="Péléide"/>
+	<user_data username="francois@free.fr" password="jaune" type="E" 
+			   first_name="François" last_name="Pignon"/>
+	<user_data username="emile@yahoo.com" password="fleur" type="C"
+			   first_name="Émile" last_name="Lampion"
+			   street="18 rue des Lilas" post_code="59200" city="Tourcoing" country="France"/>
+	<user_data username="smith@gmail.com" password="algo" type="E" 
+			   first_name="Smith" last_name="Waterman"/>
+	<user_data username="needleman@yahoo.fr" password="alignment" type="E" 
+			   first_name="Needleman" last_name="Wunsch"/>
+			   
+	<customer_detail email="roger@gmail.com" birth_date="2001-05-30" phone="0601020304"/>
+	<customer_detail email="emile@yahoo.com" birth_date="1985-04-26" phone="0624252627"/>
+	<customer_detail email="amelie@yahoo.fr" birth_date="1990-10-17" phone="0714152123"/>
+	
+ 	<purchase_order id="1" order_number="CDE20-0001" 
+					order_date="2020-01-13 17:02:00" status="Pending" customer_id="amelie@yahoo.fr"/>
+ 	<purchase_order id="2" order_number="CDE20-0002" 
+					order_date="2020-01-13 17:02:00" status="Pending" customer_id="emile@yahoo.com"/>
+ 	<order_line id="1" position="0" quantity="1" order_id="1" product_id="1"/>
+	<order_line id="2" position="1" quantity="3" order_id="1" product_id="2"/>
+ 	<order_line id="3" position="0" quantity="2" order_id="2" product_id="3"/>
+	<order_line id="4" position="1" quantity="4" order_id="2" product_id="4"/>
+
+
+	<purchase_order/>
+	<order_line/>
+	<item_counter/>
+	<item_counter item="order" subset="20" info="[null]" next_value="1"/>
+
+</dataset>
